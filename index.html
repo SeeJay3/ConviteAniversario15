@@ -15,17 +15,22 @@
                     <!-- Sua imagem do envelope -->
                     <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image" id="envelope-image">
                     <div class="envelope-content">
-                        <div class="birthday-girl">Amy Abrantes</div>
+                        <div class="birthday-girl">Amy Gandos Abrantes</div>
                         <div class="age">15 Anos</div>
                         <div class="preview-text" id="preview-text">Clique para abrir o convite</div>
                     </div>
                 </div>
             </div>
 
+            <!-- Aviso para clique -->
+            <div class="click-instruction" id="click-instruction">
+                <p>👆 Clique no envelope</p>
+            </div>
+
             <!-- Convite expandido -->
             <div class="invitation-card" id="invitation-card">
                 <div class="invitation-title">15 Anos</div>
-                <div class="invitation-subtitle">Amy Abrantes</div>
+                <div class="invitation-subtitle">Amy Gandos Abrantes</div>
                 
                 <div class="event-details">
                     <div class="detail-item">
@@ -104,8 +109,9 @@
                 envelopeContainer.classList.add('opened');
                 
                 setTimeout(() => {
-                    // Esconder envelope
+                    // Esconder envelope e aviso
                     envelopeContainer.classList.add('hidden');
+                    document.getElementById('click-instruction').style.display = 'none';
                     
                     // Ajustar container para centralizar convite
                     mainContainer.classList.add('invitation-opened');
