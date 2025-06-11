@@ -8,10 +8,11 @@
 }
 
 body {
-    background: #E57E87;
+    background: #F2D9D0;
     min-height: 100vh;
     overflow-x: hidden;
     font-family: 'Cormorant Garamond', serif !important;
+    color: #E57E87;
 }
 
 /* Animações */
@@ -136,20 +137,21 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #e91e63;
+    color: #E57E87;
     font-family: 'Cormorant Garamond', serif !important;
 }
 
 .age {
     font-size: 2rem;
-    color: #f48fb1;
+    font-weight: bold;
+    color: #E57E87;
     margin-bottom: 12px;
     font-family: 'Cormorant Garamond', serif !important;
 }
 
 .preview-text {
     font-size: 0.875rem;
-    color: #ad1457;
+    color: #E57E87;
     font-style: italic;
     font-family: 'Cormorant Garamond', serif !important;
 }
@@ -178,9 +180,9 @@ body {
 }
 
 .invitation-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #e91e63;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #E57E87;
     margin-bottom: 0.5rem;
     font-style: italic;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -189,7 +191,7 @@ body {
 
 .invitation-subtitle {
     font-size: 1.3rem;
-    color: #f48fb1;
+    color: #E57E87;
     margin-bottom: 2rem;
     font-weight: 500;
     font-style: italic;
@@ -209,7 +211,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #e91e63;
+    color: #E57E87;
     font-size: 1.1rem;
     flex: 1;
     min-width: 150px;
@@ -226,7 +228,7 @@ body {
     transform: translateY(-50%);
     width: 2px;
     height: 60px;
-    background: linear-gradient(to bottom, transparent, #f48fb1, transparent);
+    background: linear-gradient(to bottom, transparent, #E57E87, transparent);
 }
 
 .detail-item span {
@@ -262,9 +264,9 @@ body {
 }
 
 .btn {
-    background: linear-gradient(135deg, #fce4ec, #f8bbd9, #f48fb1);
-    color: #ad1457;
-    border: 2px solid #f48fb1;
+    background: linear-gradient(135deg, #fce4ec, #f8bbd9, #E57E87);
+    color: #E57E87;
+    border: 2px solid #E57E87;
     padding: 15px 30px;
     border-radius: 30px;
     font-family: 'Cormorant Garamond', serif !important;
@@ -273,7 +275,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 
-        0 8px 25px rgba(244, 143, 177, 0.3),
+        0 8px 25px rgba(229, 126, 135, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.6);
     min-width: 200px;
     text-shadow: none;
@@ -281,10 +283,10 @@ body {
 
 .btn:hover {
     transform: translateY(-3px) scale(1.05);
-    background: linear-gradient(135deg, #f48fb1, #e91e63);
+    background: linear-gradient(135deg, #E57E87, #d86e77);
     color: white;
     box-shadow: 
-        0 12px 35px rgba(244, 143, 177, 0.5),
+        0 12px 35px rgba(229, 126, 135, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -329,7 +331,7 @@ body {
 }
 
 .modal h3 {
-    color: #e91e63;
+    color: #E57E87;
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -344,13 +346,13 @@ body {
 .dress-code {
     font-size: 2rem;
     font-weight: bold;
-    color: #f48fb1;
+    color: #E57E87;
     margin-bottom: 1rem;
     font-family: 'Cormorant Garamond', serif !important;
 }
 
 .modal p {
-    color: #ad1457;
+    color: #E57E87;
     margin-bottom: 1.5rem;
     line-height: 1.5;
     font-family: 'Cormorant Garamond', serif !important;
@@ -363,7 +365,7 @@ body {
 
 .form-group label {
     display: block;
-    color: #e91e63;
+    color: #E57E87;
     font-weight: 500;
     margin-bottom: 5px;
     font-family: 'Cormorant Garamond', serif !important;
@@ -372,19 +374,20 @@ body {
 .form-group input {
     width: 100%;
     padding: 8px;
-    border: 2px solid #f48fb1;
+    border: 2px solid #E57E87;
     border-radius: 8px;
     font-family: 'Cormorant Garamond', serif !important;
     font-size: 0.9rem;
     transition: border-color 0.3s ease;
     background: rgba(255, 255, 255, 0.9);
     box-sizing: border-box;
+    color: #E57E87;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: #e91e63;
-    box-shadow: 0 0 0 3px rgba(244, 143, 177, 0.3);
+    border-color: #d86e77;
+    box-shadow: 0 0 0 3px rgba(229, 126, 135, 0.3);
 }
 
 .form-buttons {
@@ -430,7 +433,7 @@ body {
 }
 
 .close-btn {
-    background: linear-gradient(135deg, #f8bbd9, #f48fb1);
+    background: linear-gradient(135deg, #F2D9D0, #E57E87);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -439,13 +442,13 @@ body {
     font-family: 'Cormorant Garamond', serif !important;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(244, 143, 177, 0.4);
+    box-shadow: 0 4px 15px rgba(229, 126, 135, 0.4);
 }
 
 .close-btn:hover {
-    background: linear-gradient(135deg, #f48fb1, #e91e63);
+    background: linear-gradient(135deg, #E57E87, #d86e77);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(244, 143, 177, 0.6);
+    box-shadow: 0 6px 20px rgba(229, 126, 135, 0.6);
 }
 
 /* Estados do convite aberto */
