@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 Anos - Amy Gandos Abrantes</title>
+    <title>15 Anos - Amy Abrantes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container" id="main-container">
         <div class="content">
-            <!-- Envelope -->
+            <!-- Envelope com imagem -->
             <div class="envelope-container" id="envelope-container">
                 <div class="envelope" id="envelope">
-                    <div class="envelope-flap"></div>
-                    <div class="seal">A</div>
+                    <!-- Sua imagem do envelope -->
+                    <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image" id="envelope-image">
                     <div class="envelope-content">
-                        <div class="birthday-girl">Amy Gandos Abrantes</div>
+                        <div class="birthday-girl">Amy Abrantes</div>
                         <div class="age">15 Anos</div>
                         <div class="preview-text" id="preview-text">Clique para abrir o convite</div>
                     </div>
@@ -25,7 +25,7 @@
             <!-- Convite expandido -->
             <div class="invitation-card" id="invitation-card">
                 <div class="invitation-title">15 Anos</div>
-                <div class="invitation-subtitle">Amy Gandos Abrantes</div>
+                <div class="invitation-subtitle">Amy Abrantes</div>
                 
                 <div class="event-details">
                     <div class="detail-item">
@@ -152,7 +152,7 @@
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaudz67oYmsim_TrNoOih987YXEd0g3a235iKUAiSPqdpYkNpPmnBLRnnaJmsHLozqlg/exec';
             
             // Verificar se a URL foi configurada
-            if (GOOGLE_SCRIPT_URL.includes('SEU_ID_AQUI')) {
+            if (GOOGLE_SCRIPT_URL.includes('AKfycbwaudz67oYmsim_TrNoOih987YXEd0g3a235iKUAiSPqdpYkNpPmnBLRnnaJmsHLozqlg')) {
                 console.log('⚠️ URL do Google Apps Script não configurada');
                 alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕\n\n⚠️ Configure a URL do Google Apps Script para salvar automaticamente.`);
                 closeConfirmModal();
