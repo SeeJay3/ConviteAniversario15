@@ -130,8 +130,9 @@
         });
 
         document.getElementById('confirm-btn').addEventListener('click', function() {
-            document.getElementById('confirm-modal').classList.add('show');
+        window.open('https://forms.gle/TaP68wkikhEPQEPu6', '_blank');
         });
+
 
         function closeDressCodeModal() {
             document.getElementById('dress-code-modal').classList.remove('show');
@@ -143,6 +144,12 @@
             document.getElementById('phone').value = '';
         }
 
+       function submitForm() {
+            // Abre o link em uma nova aba
+            window.open('https://forms.gle/TaP68wkikhEPQEPu6', '_blank');
+        }
+
+
         // Fechar modal clicando fora
         window.addEventListener('click', function(e) {
             if (e.target === document.getElementById('dress-code-modal')) {
@@ -152,13 +159,6 @@
                 closeConfirmModal();
             }
         });
-        function submitForm() {
-            // Abre o link em uma nova aba
-            window.open('https://forms.gle/TaP68wkikhEPQEPu6', '_blank');
-        }
-
     </script>
-
-    
 </body>
 </html>
