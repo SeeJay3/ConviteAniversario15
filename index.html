@@ -1,150 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 Anos - Amy Abrantes</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 Anos - Amy Abrantes</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body { margin:0; font-family: 'Cormorant Garamond', serif; background:#f8f0f8; display:flex; justify-content:center; align-items:center; height:100vh; }
+    .container { text-align:center; }
+    .envelope-container { cursor:pointer; transition:0.5s; }
+    .envelope { width:250px; margin:0 auto; transition:0.5s; }
+    .envelope.opened { transform: rotateX(180deg); }
+    .envelope-container.hidden { display:none; }
+    .invitation-card { display:none; background:#fff; padding:20px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.3); width:300px; margin:20px auto; }
+    .invitation-card.show { display:block; }
+    .buttons-container { margin-top:20px; }
+    .btn { padding:10px 15px; margin:5px; cursor:pointer; border:none; border-radius:5px; background:#a63ca6; color:white; }
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+    .modal.show { display:flex; }
+    .modal-content { background:white; padding:20px; border-radius:10px; text-align:center; width:80%; max-width:350px; }
+    .form-group { margin:10px 0; text-align:left; }
+    input[type=text], input[type=tel] { width:100%; padding:8px; border-radius:5px; border:1px solid #ccc; }
+</style>
 </head>
 <body>
-    <div class="container" id="main-container">
-        <div class="content">
-            <div class="envelope-container" id="envelope-container">
-                <div class="envelope" id="envelope">
-                    <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image">
+<div class="container" id="main-container">
+    <div class="content">
+        <div class="envelope-container" id="envelope-container">
+            <div class="envelope" id="envelope">
+                <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image">
+            </div>
+        </div>
+
+        <div class="click-instruction" id="click-instruction">
+            <p>👆 Clique no envelope</p>
+        </div>
+
+        <div class="invitation-card" id="invitation-card">
+            <div class="invitation-title">AG</div>
+            <div class="invitation-subtitle">Amy Gandos Abrantes</div>
+            <div class="event-details">
+                <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <span><strong>Data:</strong><br>11 de outubro de 2025</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">📍</span>
+                    <span><strong>Local:</strong><br>Restaurante Mutirão<br>R. Vinte e Um, nº 58<br>Vila Santa Cecília<br>Volta Redonda - RJ</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">🕐</span>
+                    <span><strong>Horário:</strong><br>20h às 00h</span>
+                </div>
+                <div class="detail-item">
+                    <span><strong>Confirmar Presença até</strong><br>26/09</span>
                 </div>
             </div>
-
-            <div class="click-instruction" id="click-instruction">
-                <p>👆 Clique no envelope</p>
-            </div>
-
-            <div class="invitation-card" id="invitation-card">
-                <div class="invitation-title">AG</div>
-                <div class="invitation-subtitle">Amy Gandos Abrantes</div>
-                <div class="event-details">
-                    <div class="detail-item">
-                        <span class="detail-icon">📅</span>
-                        <span><strong>Data:</strong><br>11 de outubro de 2025</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-icon">📍</span>
-                        <span><strong>Local:</strong><br>Restaurante Mutirão<br>R. Vinte e Um, nº 58<br>Vila Santa Cecília<br>Volta Redonda - RJ</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-icon">🕐</span>
-                        <span><strong>Horário:</strong><br>20h às 00h</span>
-                    </div>
-                    <div class="detail-item">
-                        <span><strong>Confirmar Presença até</strong><br>26/09</span>
-                    </div>
-                </div>
-                <div class="buttons-container">
-                    <button class="btn" id="dress-code-btn">Dress Code</button>
-                    <button class="btn" id="confirm-btn">Confirmar Presença</button>
-                </div>
+            <div class="buttons-container">
+                <button class="btn" id="dress-code-btn">Dress Code</button>
+                <button class="btn" id="confirm-btn">Confirmar Presença</button>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal" id="dress-code-modal">
-        <div class="modal-content">
-            <h3>Dress Code</h3>
-            <div class="dress-code">Esporte Fino</div>
-            <p>Vista-se com elegância e conforto para celebrar conosco! ✨</p>
-            <button class="close-btn" onclick="closeDressCodeModal()">Fechar</button>
+<div class="modal" id="dress-code-modal">
+    <div class="modal-content">
+        <h3>Dress Code</h3>
+        <div class="dress-code">Esporte Fino</div>
+        <p>Vista-se com elegância e conforto para celebrar conosco! ✨</p>
+        <button class="close-btn" onclick="closeDressCodeModal()">Fechar</button>
+    </div>
+</div>
+
+<div class="modal" id="confirm-modal">
+    <div class="modal-content">
+        <div class="emoji">💕</div>
+        <h3>Confirmar Presença</h3>
+        <div class="form-group">
+            <label for="name">Nome Completo:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefone para Contato:</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="form-buttons">
+            <button class="btn btn-confirm" onclick="submitForm()">Confirmar</button>
+            <button class="btn btn-cancel" onclick="closeConfirmModal()">Cancelar</button>
         </div>
     </div>
+</div>
 
-    <div class="modal" id="confirm-modal">
-        <div class="modal-content">
-            <div class="emoji">💕</div>
-            <h3>Confirmar Presença</h3>
-            <div class="form-group">
-                <label for="name">Nome Completo:</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div class="form-group">
-                <label for="phone">Telefone para Contato:</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-buttons">
-                <button class="btn btn-confirm" onclick="submitForm()">Confirmar</button>
-                <button class="btn btn-cancel" onclick="closeConfirmModal()">Cancelar</button>
-            </div>
-        </div>
-    </div>
+<script>
+let isOpened = false;
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
 
-    <script>
-        let isOpened = false;
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('*').forEach(el => el.style.fontFamily = '"Cormorant Garamond", serif');
+});
 
-        // URL do Apps Script publicado
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
+document.getElementById('envelope-container').addEventListener('click', () => {
+    if (isOpened) return;
+    const envelopeContainer = document.getElementById('envelope-container');
+    const envelope = document.getElementById('envelope');
+    const mainContainer = document.getElementById('main-container');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('*').forEach(el => el.style.fontFamily = '"Cormorant Garamond", serif');
-        });
+    envelope.classList.add('opened');
+    envelopeContainer.classList.add('opened');
 
-        document.getElementById('envelope-container').addEventListener('click', () => {
-            if (isOpened) return;
-            const envelopeContainer = document.getElementById('envelope-container');
-            const envelope = document.getElementById('envelope');
-            const mainContainer = document.getElementById('main-container');
+    setTimeout(() => {
+        envelopeContainer.classList.add('hidden');
+        document.getElementById('click-instruction').style.display = 'none';
+        mainContainer.classList.add('invitation-opened');
+        setTimeout(() => document.getElementById('invitation-card').classList.add('show'), 200);
+    }, 1000);
 
-            envelope.classList.add('opened');
-            envelopeContainer.classList.add('opened');
+    isOpened = true;
+});
 
-            setTimeout(() => {
-                envelopeContainer.classList.add('hidden');
-                document.getElementById('click-instruction').style.display = 'none';
-                mainContainer.classList.add('invitation-opened');
-                setTimeout(() => document.getElementById('invitation-card').classList.add('show'), 200);
-            }, 1000);
+document.getElementById('dress-code-btn').addEventListener('click', () => document.getElementById('dress-code-modal').classList.add('show'));
+document.getElementById('confirm-btn').addEventListener('click', () => document.getElementById('confirm-modal').classList.add('show'));
 
-            isOpened = true;
-        });
+function closeDressCodeModal() { document.getElementById('dress-code-modal').classList.remove('show'); }
+function closeConfirmModal() { 
+    document.getElementById('confirm-modal').classList.remove('show'); 
+    document.getElementById('name').value = '';
+    document.getElementById('phone').value = '';
+}
 
-        document.getElementById('dress-code-btn').addEventListener('click', () => document.getElementById('dress-code-modal').classList.add('show'));
-        document.getElementById('confirm-btn').addEventListener('click', () => document.getElementById('confirm-modal').classList.add('show'));
+function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if(!name || !phone) { alert('Por favor, preencha todos os campos!'); return; }
 
-        function closeDressCodeModal() { document.getElementById('dress-code-modal').classList.remove('show'); }
-        function closeConfirmModal() { 
-            document.getElementById('confirm-modal').classList.remove('show'); 
-            document.getElementById('name').value = '';
-            document.getElementById('phone').value = '';
-        }
+    const confirmBtn = document.querySelector('.btn-confirm');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Enviando...';
+    confirmBtn.disabled = true;
 
-        function submitForm() {
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            if(!name || !phone) { alert('Por favor, preencha todos os campos!'); return; }
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: name, telefone: phone })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === 'success') alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
+        else alert(`Erro: ${data.message}`);
+        closeConfirmModal();
+    })
+    .catch(err => { console.error(err); alert('Não foi possível enviar os dados. Tente novamente.'); })
+    .finally(() => { confirmBtn.textContent = originalText; confirmBtn.disabled = false; });
+}
 
-            const confirmBtn = document.querySelector('.btn-confirm');
-            const originalText = confirmBtn.textContent;
-            confirmBtn.textContent = 'Enviando...';
-            confirmBtn.disabled = true;
-
-            const formData = { nome: name, telefone: phone };
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === 'success') alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
-                else alert(`Erro: ${data.message}`);
-                closeConfirmModal();
-            })
-            .catch(err => { console.error(err); alert('Não foi possível enviar os dados. Tente novamente.'); })
-            .finally(() => { confirmBtn.textContent = originalText; confirmBtn.disabled = false; });
-        }
-
-        window.addEventListener('click', e => {
-            if(e.target === document.getElementById('dress-code-modal')) closeDressCodeModal();
-            if(e.target === document.getElementById('confirm-modal')) closeConfirmModal();
-        });
-    </script>
+window.addEventListener('click', e => {
+    if(e.target === document.getElementById('dress-code-modal')) closeDressCodeModal();
+    if(e.target === document.getElementById('confirm-modal')) closeConfirmModal();
+});
+</script>
 </body>
 </html>
