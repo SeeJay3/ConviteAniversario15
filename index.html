@@ -144,13 +144,13 @@
         }
 
         function submitForm() {
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            
-            if (!name || !phone) {
-                alert('Por favor, preencha todos os campos!');
-                return;
-            }
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!name || !phone) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+    }
             
             // SUBSTITUA pela URL do seu Google Apps Script implantado
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
@@ -163,51 +163,41 @@
                 return;
             }
             
-            // Mostrar loading
-            const confirmBtn = document.querySelector('.btn-confirm');
-            const originalText = confirmBtn.textContent;
-            confirmBtn.textContent = 'Enviando...';
-            confirmBtn.disabled = true;
-            
-            // Dados para enviar
-            const formData = {
-                nome: name,
-                telefone: phone,
-                timestamp: new Date().toISOString()
-            };
-            
-            console.log('📤 Enviando dados para:', GOOGLE_SCRIPT_URL);
-            console.log('📦 Dados:', formData);
-            
-            // Criar formulário para envio
-            const form = new FormData();
-            form.append('dados', JSON.stringify(formData));
-            
-            // Método alternativo mais compatível
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                console.log('✅ Resposta recebida:', response.status);
-                return response.text();
-            })
-            .then(data => {
-                console.log('📥 Dados da resposta:', data);
-                alert(`Presença confirmada com sucesso! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕`);
-                closeConfirmModal();
-            })
-            .catch(error => {
-                console.log('❌ Erro na requisição:', error);
-                // Tentar método alternativo
-                tentarEnvioAlternativo(formData, name, phone);
-            })
-            .finally(() => {
-                // Restaurar botão
-                confirmBtn.textContent = originalText;
-                confirmBtn.disabled = false;
-            });
+                // Mostrar loading
+    const confirmBtn = document.querySelector('.btn-confirm');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.textContent = 'Enviando...';
+    confirmBtn.disabled = true;
+
+    const formData = {
+        nome: name,
+        telefone: phone,
+        timestamp: new Date().toISOString()
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert(`Presença confirmada com sucesso! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
+        } else {
+            alert(`Erro ao enviar: ${data.message}`);
         }
+        closeConfirmModal();
+    })
+    .catch(error => {
+        console.error('❌ Erro na requisição:', error);
+        alert('Ocorreu um erro ao enviar os dados. Tente novamente.');
+    })
+    .finally(() => {
+        confirmBtn.textContent = originalText;
+        confirmBtn.disabled = false;
+    });
+}
 
         function tentarEnvioAlternativo(formData, name, phone) {
             console.log('🔄 Tentando método alternativo...');
