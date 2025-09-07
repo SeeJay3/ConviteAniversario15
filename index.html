@@ -155,14 +155,6 @@
             // SUBSTITUA pela URL do seu Google Apps Script implantado
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
             
-            // Verificar se a URL foi configurada
-            if (GOOGLE_SCRIPT_URL.includes('AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ')) {
-                console.log('⚠️ URL do Google Apps Script não configurada');
-                alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕`);
-                closeConfirmModal();
-                return;
-            }
-            
                 // Mostrar loading
     const confirmBtn = document.querySelector('.btn-confirm');
     const originalText = confirmBtn.textContent;
