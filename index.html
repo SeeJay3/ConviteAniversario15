@@ -9,29 +9,19 @@
 <body>
     <div class="container" id="main-container">
         <div class="content">
-            <!-- Envelope com imagem -->
             <div class="envelope-container" id="envelope-container">
                 <div class="envelope" id="envelope">
-                    <!-- Sua imagem do envelope -->
-                    <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image" id="envelope-image">
-                    <div class="envelope-content">
-                        <div class="birthday-girl">Amy Gandos Abrantes</div>
-                        <div class="age">15 Anos</div>
-                        <div class="preview-text" id="preview-text">Clique para abrir o convite</div>
-                    </div>
+                    <img src="Envelope.png" alt="Convite 15 Anos Amy" class="envelope-image">
                 </div>
             </div>
 
-            <!-- Aviso para clique -->
             <div class="click-instruction" id="click-instruction">
                 <p>👆 Clique no envelope</p>
             </div>
 
-            <!-- Convite expandido -->
             <div class="invitation-card" id="invitation-card">
-                <div class="invitation-title">15 Anos</div>
+                <div class="invitation-title">AG</div>
                 <div class="invitation-subtitle">Amy Gandos Abrantes</div>
-                
                 <div class="event-details">
                     <div class="detail-item">
                         <span class="detail-icon">📅</span>
@@ -45,20 +35,20 @@
                         <span class="detail-icon">🕐</span>
                         <span><strong>Horário:</strong><br>20h às 00h</span>
                     </div>
+                    <div class="detail-item">
+                        <span><strong>Confirmar Presença até</strong><br>26/09</span>
+                    </div>
                 </div>
-
                 <div class="buttons-container">
-                    <button class="btn" id="dress-code-btn">👗 Dress Code</button>
-                    <button class="btn" id="confirm-btn">✅ Confirmar Presença</button>
+                    <button class="btn" id="dress-code-btn">Dress Code</button>
+                    <button class="btn" id="confirm-btn">Confirmar Presença</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Dress Code -->
     <div class="modal" id="dress-code-modal">
         <div class="modal-content">
-            <div class="emoji">👗</div>
             <h3>Dress Code</h3>
             <div class="dress-code">Esporte Fino</div>
             <p>Vista-se com elegância e conforto para celebrar conosco! ✨</p>
@@ -66,7 +56,6 @@
         </div>
     </div>
 
-    <!-- Modal Confirmação -->
     <div class="modal" id="confirm-modal">
         <div class="modal-content">
             <div class="emoji">💕</div>
@@ -89,58 +78,38 @@
     <script>
         let isOpened = false;
 
-        // Aplicar fonte quando a página carregar
-        document.addEventListener('DOMContentLoaded', function() {
-            const allElements = document.querySelectorAll('*');
-            allElements.forEach(element => {
-                element.style.fontFamily = '"Cormorant Garamond", serif';
-            });
+        // URL do Apps Script publicado
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('*').forEach(el => el.style.fontFamily = '"Cormorant Garamond", serif');
         });
 
-        // Controle do envelope
-        document.getElementById('envelope-container').addEventListener('click', function() {
-            if (!isOpened) {
-                const envelopeContainer = document.getElementById('envelope-container');
-                const envelope = document.getElementById('envelope');
-                const mainContainer = document.getElementById('main-container');
-                
-                // Abrir envelope
-                envelope.classList.add('opened');
-                envelopeContainer.classList.add('opened');
-                
-                setTimeout(() => {
-                    // Esconder envelope e aviso
-                    envelopeContainer.classList.add('hidden');
-                    document.getElementById('click-instruction').style.display = 'none';
-                    
-                    // Ajustar container para centralizar convite
-                    mainContainer.classList.add('invitation-opened');
-                    
-                    // Mostrar convite centralizado
-                    setTimeout(() => {
-                        document.getElementById('invitation-card').classList.add('show');
-                    }, 200);
-                }, 1000);
-                
-                isOpened = true;
-            }
+        document.getElementById('envelope-container').addEventListener('click', () => {
+            if (isOpened) return;
+            const envelopeContainer = document.getElementById('envelope-container');
+            const envelope = document.getElementById('envelope');
+            const mainContainer = document.getElementById('main-container');
+
+            envelope.classList.add('opened');
+            envelopeContainer.classList.add('opened');
+
+            setTimeout(() => {
+                envelopeContainer.classList.add('hidden');
+                document.getElementById('click-instruction').style.display = 'none';
+                mainContainer.classList.add('invitation-opened');
+                setTimeout(() => document.getElementById('invitation-card').classList.add('show'), 200);
+            }, 1000);
+
+            isOpened = true;
         });
 
-        // Controle dos modais
-        document.getElementById('dress-code-btn').addEventListener('click', function() {
-            document.getElementById('dress-code-modal').classList.add('show');
-        });
+        document.getElementById('dress-code-btn').addEventListener('click', () => document.getElementById('dress-code-modal').classList.add('show'));
+        document.getElementById('confirm-btn').addEventListener('click', () => document.getElementById('confirm-modal').classList.add('show'));
 
-        document.getElementById('confirm-btn').addEventListener('click', function() {
-            document.getElementById('confirm-modal').classList.add('show');
-        });
-
-        function closeDressCodeModal() {
-            document.getElementById('dress-code-modal').classList.remove('show');
-        }
-
-        function closeConfirmModal() {
-            document.getElementById('confirm-modal').classList.remove('show');
+        function closeDressCodeModal() { document.getElementById('dress-code-modal').classList.remove('show'); }
+        function closeConfirmModal() { 
+            document.getElementById('confirm-modal').classList.remove('show'); 
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
         }
@@ -148,109 +117,33 @@
         function submitForm() {
             const name = document.getElementById('name').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            
-            if (!name || !phone) {
-                alert('Por favor, preencha todos os campos!');
-                return;
-            }
-            
-            // SUBSTITUA pela URL do seu Google Apps Script implantado
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaudz67oYmsim_TrNoOih987YXEd0g3a235iKUAiSPqdpYkNpPmnBLRnnaJmsHLozqlg/exec';
-            
-            // Verificar se a URL foi configurada
-            if (GOOGLE_SCRIPT_URL.includes('AKfycbwaudz67oYmsim_TrNoOih987YXEd0g3a235iKUAiSPqdpYkNpPmnBLRnnaJmsHLozqlg')) {
-                console.log('⚠️ URL do Google Apps Script não configurada');
-                alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕\n\n⚠️ Configure a URL do Google Apps Script para salvar automaticamente.`);
-                closeConfirmModal();
-                return;
-            }
-            
-            // Mostrar loading
+            if(!name || !phone) { alert('Por favor, preencha todos os campos!'); return; }
+
             const confirmBtn = document.querySelector('.btn-confirm');
             const originalText = confirmBtn.textContent;
             confirmBtn.textContent = 'Enviando...';
             confirmBtn.disabled = true;
-            
-            // Dados para enviar
-            const formData = {
-                nome: name,
-                telefone: phone,
-                timestamp: new Date().toISOString()
-            };
-            
-            console.log('📤 Enviando dados para:', GOOGLE_SCRIPT_URL);
-            console.log('📦 Dados:', formData);
-            
-            // Criar formulário para envio
-            const form = new FormData();
-            form.append('dados', JSON.stringify(formData));
-            
-            // Método alternativo mais compatível
+
+            const formData = { nome: name, telefone: phone };
+
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
-                body: JSON.stringify(formData)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
             })
-            .then(response => {
-                console.log('✅ Resposta recebida:', response.status);
-                return response.text();
-            })
+            .then(res => res.json())
             .then(data => {
-                console.log('📥 Dados da resposta:', data);
-                alert(`Presença confirmada com sucesso! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕`);
+                if(data.status === 'success') alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
+                else alert(`Erro: ${data.message}`);
                 closeConfirmModal();
             })
-            .catch(error => {
-                console.log('❌ Erro na requisição:', error);
-                // Tentar método alternativo
-                tentarEnvioAlternativo(formData, name, phone);
-            })
-            .finally(() => {
-                // Restaurar botão
-                confirmBtn.textContent = originalText;
-                confirmBtn.disabled = false;
-            });
+            .catch(err => { console.error(err); alert('Não foi possível enviar os dados. Tente novamente.'); })
+            .finally(() => { confirmBtn.textContent = originalText; confirmBtn.disabled = false; });
         }
 
-        function tentarEnvioAlternativo(formData, name, phone) {
-            console.log('🔄 Tentando método alternativo...');
-            
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwaudz67oYmsim_TrNoOih987YXEd0g3a235iKUAiSPqdpYkNpPmnBLRnnaJmsHLozqlg/exec';
-            
-            // Criar iframe oculto para envio
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            iframeDoc.open();
-            iframeDoc.write(`
-                <form method="POST" action="${GOOGLE_SCRIPT_URL}">
-                    <input type="hidden" name="dados" value='${JSON.stringify(formData)}'>
-                </form>
-            `);
-            iframeDoc.close();
-            
-            const form = iframeDoc.querySelector('form');
-            form.submit();
-            
-            // Remover iframe após alguns segundos
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-            }, 3000);
-            
-            console.log('✅ Dados enviados via método alternativo');
-            alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕`);
-            closeConfirmModal();
-        }
-
-        // Fechar modal clicando fora
-        window.addEventListener('click', function(e) {
-            if (e.target === document.getElementById('dress-code-modal')) {
-                closeDressCodeModal();
-            }
-            if (e.target === document.getElementById('confirm-modal')) {
-                closeConfirmModal();
-            }
+        window.addEventListener('click', e => {
+            if(e.target === document.getElementById('dress-code-modal')) closeDressCodeModal();
+            if(e.target === document.getElementById('confirm-modal')) closeConfirmModal();
         });
     </script>
 </body>
