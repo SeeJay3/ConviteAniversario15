@@ -143,90 +143,6 @@
             document.getElementById('phone').value = '';
         }
 
-        function submitForm() {
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-
-    if (!name || !phone) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-    }
-
-    // URL do seu Web App do Google Apps Script
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
-
-    const confirmBtn = document.querySelector('.btn-confirm');
-    const originalText = confirmBtn.textContent;
-    confirmBtn.textContent = 'Enviando...';
-    confirmBtn.disabled = true;
-
-    const formData = {
-        nome: name,
-        telefone: phone,
-        timestamp: new Date().toISOString()
-    };
-
-    // Criar iframe oculto
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    iframeDoc.open();
-    iframeDoc.write(`
-        <form method="POST" action="${GOOGLE_SCRIPT_URL}">
-            <input type="hidden" name="dados" value='${JSON.stringify(formData)}'>
-        </form>
-    `);
-    iframeDoc.close();
-
-    // Submeter o formulário
-    const form = iframeDoc.querySelector('form');
-    form.submit();
-
-    // Remover iframe após 3 segundos e exibir alerta
-    setTimeout(() => {
-        document.body.removeChild(iframe);
-        alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
-        closeConfirmModal();
-        confirmBtn.textContent = originalText;
-        confirmBtn.disabled = false;
-    }, 3000);
-}
-
-
-        function tentarEnvioAlternativo(formData, name, phone) {
-            console.log('🔄 Tentando método alternativo...');
-            
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
-            
-            // Criar iframe oculto para envio
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            iframeDoc.open();
-            iframeDoc.write(`
-                <form method="POST" action="${GOOGLE_SCRIPT_URL}">
-                    <input type="hidden" name="dados" value='${JSON.stringify(formData)}'>
-                </form>
-            `);
-            iframeDoc.close();
-            
-            const form = iframeDoc.querySelector('form');
-            form.submit();
-            
-            // Remover iframe após alguns segundos
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-            }, 3000);
-            
-            console.log('✅ Dados enviados via método alternativo');
-            alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}\n\nObrigada por confirmar! Estamos ansiosos para celebrar com você! 💕`);
-            closeConfirmModal();
-        }
-
         // Fechar modal clicando fora
         window.addEventListener('click', function(e) {
             if (e.target === document.getElementById('dress-code-modal')) {
@@ -236,6 +152,13 @@
                 closeConfirmModal();
             }
         });
+        function submitForm() {
+            // Abre o link em uma nova aba
+            window.open('https://forms.gle/TaP68wkikhEPQEPu6', '_blank');
+        }
+
     </script>
+
+    
 </body>
 </html>
