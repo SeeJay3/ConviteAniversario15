@@ -151,11 +151,10 @@
         alert('Por favor, preencha todos os campos!');
         return;
     }
-            
-            // SUBSTITUA pela URL do seu Google Apps Script implantado
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
-            
-                // Mostrar loading
+
+    // URL do seu Web App do Google Apps Script
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOUO21rf5ZGlblTAIzsWGwAiye6ssV3pqJf0IDZq3bPnQnXzNPsGeIzxFJxuCM9F1JyQ/exec';
+
     const confirmBtn = document.querySelector('.btn-confirm');
     const originalText = confirmBtn.textContent;
     confirmBtn.textContent = 'Enviando...';
@@ -167,29 +166,34 @@
         timestamp: new Date().toISOString()
     };
 
-    fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert(`Presença confirmada com sucesso! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
-        } else {
-            alert(`Erro ao enviar: ${data.message}`);
-        }
+    // Criar iframe oculto
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(`
+        <form method="POST" action="${GOOGLE_SCRIPT_URL}">
+            <input type="hidden" name="dados" value='${JSON.stringify(formData)}'>
+        </form>
+    `);
+    iframeDoc.close();
+
+    // Submeter o formulário
+    const form = iframeDoc.querySelector('form');
+    form.submit();
+
+    // Remover iframe após 3 segundos e exibir alerta
+    setTimeout(() => {
+        document.body.removeChild(iframe);
+        alert(`Presença confirmada! ✅\n\nNome: ${name}\nTelefone: ${phone}`);
         closeConfirmModal();
-    })
-    .catch(error => {
-        console.error('❌ Erro na requisição:', error);
-        alert('Ocorreu um erro ao enviar os dados. Tente novamente.');
-    })
-    .finally(() => {
         confirmBtn.textContent = originalText;
         confirmBtn.disabled = false;
-    });
+    }, 3000);
 }
+
 
         function tentarEnvioAlternativo(formData, name, phone) {
             console.log('🔄 Tentando método alternativo...');
